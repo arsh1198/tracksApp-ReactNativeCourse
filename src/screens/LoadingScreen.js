@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { View } from 'react-native'
-import * as Progress from 'react-native-progress'
 import { Context as AuthContext } from '../context/authContext'
+import { ActivityIndicator, Colors } from 'react-native-paper'
 
 const LoadingScreen = () => {
   const { tryLocalSignIn } = useContext(AuthContext)
@@ -12,7 +12,7 @@ const LoadingScreen = () => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      {/* <Progress.Circle size={30} indeterminate={true} /> */}
+      <ActivityIndicator animating={true} color={Colors.blue800} size="large" />
     </View>
   )
 }
