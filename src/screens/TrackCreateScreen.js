@@ -1,27 +1,49 @@
 import '../_mockLocation'
-import React, { useContext } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { useCallback, useContext } from 'react'
+import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-elements'
 import Map from '../components/Map'
-import { SafeAreaView } from 'react-navigation'
+import { SafeAreaView, withNavigationFocus } from 'react-navigation'
 import useLocation from '../hooks/useLocations'
 
 import { Context as LocationContext } from '../context/LocationContext'
+import TrackForm from '../components/TrackForm'
 
-const TrackCreateScreen = () => {
-  const { addLocation } = useContext(LocationContext)
-
-  const [err] = useLocation(addLocation)
+const TrackCreateScreen = ({ isFocused }) => {
+  const { state, addLocation } = useContext(LocationContext)
+  const callback = useCallback(
+    location => {
+      addLocation(location, state.recording)
+    },
+    [state.recording]
+  )
+  const [err] = useLocation(isFocused, callback)
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }}>
-      <Text h1>TrackCreateScreen</Text>
-      <Map />
+    <SafeAreaView forceInset={{ top: 'always' }} style={styles.Container}>
+      <Text h2 style={styles.Heading}>
+        TrackCreateScreen
+      </Text>
+      <View style={styles.Map}>
+        <Map />
+      </View>
       {err ? <Text>Permission not Granted!</Text> : null}
+      <TrackForm />
     </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  Container: {
+    padding: 20,
+    flex: 1
+  },
+  Map: {
+    marginVertical: 45
+  },
+  Heading: {
+    paddingVertical: 25
+  }
+})
 
-export default TrackCreateScreen
+export default withNavigationFocus(TrackCreateScreen)
