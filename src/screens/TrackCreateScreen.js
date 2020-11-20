@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   Map: {
-    marginVertical: 45
+    marginVertical: 25
   },
   Heading: {
     paddingVertical: 25
