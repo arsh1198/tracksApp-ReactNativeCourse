@@ -5,6 +5,7 @@ import { Text } from 'react-native-elements'
 import Map from '../components/Map'
 import { SafeAreaView, withNavigationFocus } from 'react-navigation'
 import useLocation from '../hooks/useLocations'
+import { AntDesign } from '@expo/vector-icons'
 
 import { Context as LocationContext } from '../context/LocationContext'
 import TrackForm from '../components/TrackForm'
@@ -25,7 +26,7 @@ const TrackCreateScreen = ({ isFocused }) => {
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={styles.Container}>
       <Text h2 style={styles.Heading}>
-        TrackCreateScreen
+        Start Tracking
       </Text>
       <View style={styles.Map}>
         <Map />
@@ -34,6 +35,11 @@ const TrackCreateScreen = ({ isFocused }) => {
       <TrackForm />
     </SafeAreaView>
   )
+}
+
+TrackCreateScreen.navigationOptions = {
+  title: 'Add Track',
+  tabBarIcon: <AntDesign name="plussquare" size={24} color="black" />
 }
 
 const styles = StyleSheet.create({

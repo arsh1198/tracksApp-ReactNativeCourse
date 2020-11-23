@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
-import { View } from 'react-native'
+import { View, ActivityIndicator } from 'react-native'
 import { Context as AuthContext } from '../context/authContext'
-import { ActivityIndicator, Colors } from 'react-native-paper'
 
 const LoadingScreen = () => {
   const { tryLocalSignIn } = useContext(AuthContext)
@@ -12,7 +11,7 @@ const LoadingScreen = () => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ActivityIndicator animating={true} color={Colors.blue800} size="large" />
+      <ActivityIndicator size="large" style={{ marginTop: 200 }} />
     </View>
   )
 }

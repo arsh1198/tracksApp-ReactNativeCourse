@@ -14,9 +14,8 @@ const TrackListScreen = ({ navigation }) => {
   const { state, fetchTracks } = useContext(TrackContext)
   console.log(state)
   return (
-    <View>
+    <View style={{ backgroundColor: '#fff', flex: 1 }}>
       <NavigationEvents onWillFocus={fetchTracks} />
-      <Text>TrackListScreen</Text>
       <FlatList
         data={state}
         keyExtractor={item => item._id}
@@ -27,13 +26,17 @@ const TrackListScreen = ({ navigation }) => {
                 navigation.navigate('TrackDetail', { id: item._id })
               }
             >
-              <ListItem chevron title={item.name} />
+              <ListItem chevron title={item.name} style={{ marginTop: 10 }} />
             </TouchableOpacity>
           )
         }}
       />
     </View>
   )
+}
+
+TrackListScreen.navigationOptions = {
+  title: 'Tracks'
 }
 
 export default TrackListScreen
